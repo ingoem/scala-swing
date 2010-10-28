@@ -1,4 +1,4 @@
-package scala.swing.test
+package scala.swing.test.group
 
 import scala.swing._
 import scala.swing.group.GroupPanel
