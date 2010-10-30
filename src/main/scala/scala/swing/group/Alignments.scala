@@ -21,17 +21,17 @@ trait Alignments {
    * 
    * @see javax.swing.GroupLayout.Alignment
    */
-  protected final class Alignment(private[group] val wrapped: GroupLayout.Alignment)
+  protected sealed class Alignment(private[group] val wrapped: GroupLayout.Alignment)
   
   /** Elements are aligned along their baseline. Only valid along the vertical axis. */
-  final val Baseline = new Alignment(GroupLayout.Alignment.BASELINE)
+  object Baseline extends Alignment(GroupLayout.Alignment.BASELINE)
   
   /** Elements are centered inside the group. */
-  final val Center = new Alignment(GroupLayout.Alignment.CENTER)
+  object Center extends Alignment(GroupLayout.Alignment.CENTER)
   
   /** Elements are anchored to the leading edge (origin) of the group. */
-  final val Leading = new Alignment(GroupLayout.Alignment.LEADING)
+  object Leading extends Alignment(GroupLayout.Alignment.LEADING)
   
   /** Elements are anchored to the trailing edge (end) of the group. */
-  final val Trailing = new Alignment(GroupLayout.Alignment.TRAILING)
+  object Trailing extends Alignment(GroupLayout.Alignment.TRAILING)
 }

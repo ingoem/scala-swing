@@ -23,11 +23,11 @@ trait BaselineAnchors {
    * Allows to specify whether to anchor the baseline to the top or the bottom 
    * of a baseline-aligned parallel group.
    */
-  protected class BaselineAnchor(private[group] val wrapped: Boolean)
+  protected sealed class BaselineAnchor(private[group] val wrapped: Boolean)
 
   /** Anchor the baseline to the top of the group. */
-  final val AnchorToTop = new BaselineAnchor(true)
+  object AnchorToTop extends BaselineAnchor(true)
   
   /** Anchor the baseline to the bottom of the group. */
-  final val AnchorToBottom = new BaselineAnchor(false)
+  object AnchorToBottom extends BaselineAnchor(false)
 }

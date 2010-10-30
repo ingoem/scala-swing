@@ -32,7 +32,7 @@ trait ComponentsInGroups extends SizeTypes { this: GroupPanel =>
    * Wraps an arbitrary component so that it may appear within a group of 
    * type `A`.
    */
-  protected class ComponentInGroup[A <: G](comp: Component) 
+  protected final class ComponentInGroup[A <: G](comp: Component) 
       extends InGroup[A] with SizeHelpers[A] {
     
     override private[group] def build(parent: A) = parent.addComponent(comp.peer)
@@ -69,7 +69,7 @@ trait ComponentsInGroups extends SizeTypes { this: GroupPanel =>
   /**
    * Wraps an arbitrary component to allow for custom size constraints.
    */
-  protected class ComponentWithSize[A <: G](comp: Component, 
+  protected final class ComponentWithSize[A <: G](comp: Component, 
       sizes: Sizes) extends InGroup[A] {    
     override private[group] def build(parent: A) =
       parent.addComponent(comp.peer, sizes.min.pixels, sizes.pref.pixels, 
@@ -100,7 +100,7 @@ trait ComponentsInGroups extends SizeTypes { this: GroupPanel =>
    * 
    * @see javax.swing.GroupLayout.SequentialGroup
    */ 
-  protected class ComponentInSequential(comp: Component, 
+  protected final class ComponentInSequential(comp: Component, 
       sizes: Option[Sizes], useAsBaseline: Boolean) 
       extends InSequential with SizeHelpers[GroupLayout#SequentialGroup] {
  
@@ -126,7 +126,7 @@ trait ComponentsInGroups extends SizeTypes { this: GroupPanel =>
    * 
    * @see javax.swing.GroupLayout.ParallelGroup
    */ 
-  protected class ComponentInParallel(comp: Component,
+  protected final class ComponentInParallel(comp: Component,
       sizes: Option[Sizes], align: Alignment) 
       extends InParallel with SizeHelpers[GroupLayout#ParallelGroup] {
     
@@ -150,7 +150,7 @@ trait ComponentsInGroups extends SizeTypes { this: GroupPanel =>
   /**
    * Additional methods for nicer control over resizing behaviour. 
    */
-  private[group] trait SizeHelpers[A <: G] {
+  private[group] sealed trait SizeHelpers[A <: G] {
     /** 
      * Specifies size constraints for this component.
      * 

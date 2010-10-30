@@ -72,7 +72,7 @@ trait Groups
    * 
    * @see javax.swing.GroupLayout.SequentialGroup
    */
-  protected class GroupInSequential(wrapped: Group, 
+  protected sealed class GroupInSequential(wrapped: Group, 
       useAsBaseline: Option[Boolean]) extends InSequential {
     override private[group] def build(parent: GroupLayout#SequentialGroup) =
       if (useAsBaseline.isDefined) parent.addGroup(useAsBaseline.get, wrapped.buildChildren)
@@ -94,7 +94,7 @@ trait Groups
    * 
    * @see javax.swing.GroupLayout.ParallelGroup
    */
-  protected class GroupInParallel(wrapped: Group, align: Option[Alignment]) extends InParallel {
+  protected sealed class GroupInParallel(wrapped: Group, align: Option[Alignment]) extends InParallel {
     override private[group] def build(parent: GroupLayout#ParallelGroup) =
       if (align.isDefined) parent.addGroup(align.get.wrapped, wrapped.buildChildren)
       else parent.addGroup(wrapped.buildChildren)

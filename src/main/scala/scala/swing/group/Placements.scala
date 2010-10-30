@@ -29,18 +29,18 @@ trait Placements {
    * 
    * @see javax.swing.LayoutStyle.ComponentPlacement
    */    
-  protected[Placements] final class RelatedOrUnrelated(
+  protected[Placements] sealed class RelatedOrUnrelated(
       cp: ComponentPlacement) extends Placement(cp)
   
   /** Used to request the distance between two visually related components. */
-  final val Related = new RelatedOrUnrelated(ComponentPlacement.RELATED)
+  object Related extends RelatedOrUnrelated(ComponentPlacement.RELATED)
   
   /** Used to request the distance between two visually unrelated components. */
-  final val Unrelated = new RelatedOrUnrelated(ComponentPlacement.UNRELATED)
+  object Unrelated extends RelatedOrUnrelated(ComponentPlacement.UNRELATED)
   
   /**
    * Used to request the (horizontal) indentation of a component that is 
    * positioned underneath another component.
    */
-  final val Indent = new Placement(ComponentPlacement.INDENT)
+  object Indent extends Placement(ComponentPlacement.INDENT)
 }
