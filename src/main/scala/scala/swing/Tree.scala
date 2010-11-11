@@ -252,7 +252,7 @@ sealed trait TreeRenderers extends RenderableCellsCompanion {
     def textNonSelectionColor = peer.getTextNonSelectionColor
     def textNonSelectionColor_=(c: Color) {peer.setTextNonSelectionColor(c)}
     def textSelectionColor = peer.getTextSelectionColor
-    def textSelectionColor(c: Color) {peer.setTextSelectionColor(c)}
+    def textSelectionColor_=(c: Color) {peer.setTextSelectionColor(c)}
 
     override def componentFor(tree: Tree[_], value: A, info: Renderer.CellInfo): Component = {
       peer.defaultRendererComponent(tree.peer, value.asInstanceOf[AnyRef], info.isSelected, info.isExpanded, info.isLeaf, info.row, info.hasFocus)
