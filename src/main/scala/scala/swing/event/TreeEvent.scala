@@ -1,23 +1,12 @@
-/*                     __                                               *\
-**     ________ ___   / /  ___     Scala API                            **
-**    / __/ __// _ | / /  / _ |    (c) 2007-2010, LAMP/EPFL             **
-**  __\ \/ /__/ __ |/ /__/ __ |    http://scala-lang.org/               **
-** /____/\___/_/ |_/____/_/ | |                                         **
-**                          |/                                          **
-\*                                                                      */
-
 package scala.swing.event
 
-import scala.swing.Tree
+import scala.swing.tree.Tree
 import scala.swing.event._
 
 trait TreeEvent[A] extends ComponentEvent {
   val source: Tree[A]
 }
 
-/**
-*  Extractor providing a pattern match against a single selected node, based on TreePathSelected events.
-*/
 object TreeNodeSelected {
   def unapply(any: Any) = any match {
     case TreePathSelected(_, _, _, newPath, _) => newPath map (_.last)

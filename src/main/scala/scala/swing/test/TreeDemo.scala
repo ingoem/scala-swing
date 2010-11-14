@@ -1,19 +1,10 @@
-/*                     __                                               *\
-**     ________ ___   / /  ___     Scala API                            **
-**    / __/ __// _ | / /  / _ |    (c) 2007-2010, LAMP/EPFL             **
-**  __\ \/ /__/ __ |/ /__/ __ |    http://scala-lang.org/               **
-** /____/\___/_/ |_/____/_/ | |                                         **
-**                          |/                                          **
-\*                                                                      */
-
-
-package scala.swing.test
-
+package scala.swing
+package test
 
 import scala.xml._
-import scala.swing._
 import Swing._
-import scala.swing.event._
+import swing.event._
+import swing.tree._
 import Tree._
 import java.awt.Color
 
@@ -42,7 +33,7 @@ object TreeDemo extends SimpleSwingApplication {
       Order(3, bob, boxOfNails, 44),
       Order(4, susan, nailGun, 1))
       
-    lazy val xmlDoc: Node = try {XML load resourceFromClassloader("/scala/swing/example/sample.xml")}
+    lazy val xmlDoc: Node = try {XML load resourceFromClassloader("/scala/swing/test/sample.xml")}
                             catch {case _ => <error> Error reading XML file. </error>}
   }
 
@@ -53,9 +44,9 @@ object TreeDemo extends SimpleSwingApplication {
       if (f.isDirectory) f.listFiles.toSeq 
       else Seq()
     }
-  
-    renderer = new LabelRenderer({f => 
-      val iconFile = "/scala/swing/example/" + (if (f.isDirectory) "folder.png" else "file.png")
+    
+    renderer = Renderer.labelled({f =>
+      val iconFile = "/scala/swing/test/images/" + (if (f.isDirectory) "folder.png" else "file.png")
       val iconURL = resourceFromClassloader(iconFile) ensuring (_ != null, "Couldn't find icon " + iconFile)
       (Icon(iconURL), f.getName)
     })

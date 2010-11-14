@@ -9,12 +9,9 @@
 package scala.swing
 import collection._
 
-
 /**
 * Describes components that have a concept of a "cell", each of which contains a value, may be selected, 
-* and may support pluggable Renderers and Editors.
-*
-* @author Ken Scambler
+ * and may support pluggable Renderers and Editors.
 */
 trait CellView[+A] {
   this: Component =>
@@ -64,20 +61,20 @@ trait CellView[+A] {
 
 /**
 * This should be mixed in to CellView implementations that support pluggable renderers.
-* @author Ken Scambler
 */
 trait RenderableCells[A] {
   this: CellView[A] =>
   val companion: RenderableCellsCompanion
   def renderer: companion.Renderer[A]
+  def renderer_=(r: companion.Renderer[A]): Unit
 }
 
 /**
 * This should be mixed in to CellView implementations that support pluggable editors.
-* @author Ken Scambler
 */
 trait EditableCells[A]  {
   this: CellView[A] =>
   val companion: EditableCellsCompanion
   def editor: companion.Editor[A]
+  def editor_=(r: companion.Editor[A]): Unit
 }
